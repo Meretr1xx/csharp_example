@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<div class="container text-center mt-5">
+    <h1 class="display-4">
+        Добро пожаловать в Трекер Проектов
+    </h1>
+
+    <p class="lead text-muted mt-3">
+        Удобный инструмент для управления вашими задачами,
+        проектами и командой.
+    </p>
+
+    <hr class="my-4">
+
+    @if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        <h4>
+            Здравствуйте, @User.Identity.Name!
+        </h4>
+
+        <div class="mt-4">
+            <a asp-controller="Projects"
+               asp-action="Index"
+               class="btn btn-primary btn-lg me-2">
+                Перейти к проектам
+            </a>
+
+            <a asp-controller="Projects"
+               asp-action="Create"
+               class="btn btn-success btn-lg">
+                Создать новый проект
+            </a>
+        </div>
+    }
+    else
+    {
+        <p class="mt-4">
+            Войдите в аккаунт, чтобы начать работу с проектами.
+        </p>
+
+        <a asp-controller="Account"
+           asp-action="Login"
+           class="btn btn-primary btn-lg me-2">
+            Войти
+        </a>
+
+        <a asp-controller="Account"
+           asp-action="Register"
+           class="btn btn-outline-primary btn-lg">
+            Зарегистрироваться
+        </a>
+    }
+</div>

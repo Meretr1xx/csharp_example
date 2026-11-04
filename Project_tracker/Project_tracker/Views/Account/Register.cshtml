@@ -1,0 +1,73 @@
+﻿@model Project_tracker.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <h2 class="text-center mb-4">Создание аккаунта</h2>
+
+    <form asp-controller="Account"
+          asp-action="Register"
+          method="post">
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="Username" class="form-label">
+                Имя пользователя
+            </label>
+            <input asp-for="Username" class="form-control"
+                   placeholder="Введите имя" />
+            <span asp-validation-for="Username"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">
+                Email
+            </label>
+            <input asp-for="Email" class="form-control"
+                   placeholder="example@mail.com" />
+            <span asp-validation-for="Email"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">
+                Пароль
+            </label>
+            <input asp-for="Password" class="form-control"
+                   placeholder="Минимум 8 символов" />
+            <span asp-validation-for="Password"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ConfirmPassword" class="form-label">
+                Повторите пароль
+            </label>
+            <input asp-for="ConfirmPassword"
+                   class="form-control" />
+            <span asp-validation-for="ConfirmPassword"
+                  class="text-danger"></span>
+        </div>
+
+        <button type="submit"
+                class="btn btn-primary w-100">
+            Зарегистрироваться
+        </button>
+    </form>
+
+    <p class="text-center mt-3">
+        Уже есть аккаунт?
+        <a asp-controller="Account" asp-action="Login">
+            Войти
+        </a>
+    </p>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

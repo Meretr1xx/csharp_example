@@ -1,0 +1,50 @@
+﻿@model Project_tracker.Models.Project
+
+@{
+    ViewData["Title"] = "Детали проекта";
+}
+
+<div class="container mt-4">
+    <h2>Проект: @Model.Name</h2>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-3">Описание:</dt>
+                <dd class="col-sm-9">@(Model.Description ?? "Описание отсутствует")</dd>
+
+                <dt class="col-sm-3">Дата начала:</dt>
+                <dd class="col-sm-9">@Model.StartDate.ToShortDateString()</dd>
+
+                <dt class="col-sm-3">Дата окончания:</dt>
+                <dd class="col-sm-9">@(Model.EndDate.HasValue ? Model.EndDate.Value.ToShortDateString() : "Не указана")</dd>
+
+                <dt class="col-sm-3">Владелец (ID):</dt>
+                <dd class="col-sm-9">@Model.OwnerId</dd>
+            </dl>
+        </div>
+    </div>
+
+    <!-- Блок со списком задач прямо в представлении -->
+    <div class="mt-4">
+        <h4>Задачи проекта</h4>
+        @if (Model.Tasks != null && Model.Tasks.Any())
+        {
+            <ul class="list-group">
+                @foreach (var task in Model.Tasks)
+                {
+                    <li class="list-group-item">@task.ToString()</li> <!-- Замените на нужное свойство задачи, например task.Title -->
+                }
+            </ul>
+        }
+        else
+        {
+            <p class="text-muted">К этому проекту пока не привязано ни одной задачи.</p>
+        }
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Назад к списку</a>
+    </div>
+</div>
